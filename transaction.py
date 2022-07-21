@@ -1,7 +1,12 @@
-class Transactions:
-    def __init__(self, id, confirmation_code, user, amount, status=enumerate('pending', 'paid', 'cancelled')):
+import enum
+from user import User
+import random
+
+class Transactions(User):
+    def __init__(self, id, amount):
         self.id = id
-        self.confirmation_code = confirmation_code
-        self.user = user
+        self.confirmation_code = random.randint(1000, 9999)
+        self.user = self.username
         self.amount = amount
-        self.status = status
+        self.status = ['pending', 'paid', 'cancelled']
+

@@ -27,8 +27,8 @@ class User:
         
 
     def save_user(self):
+        file_path = 'appdata/data.json'
         user_info = {}
-        data = []
 
         user_info['user_id'] = self.id
         user_info['username'] = self.username
@@ -40,15 +40,19 @@ class User:
         user_info['total_paid_amount'] = self.total_paid_amount
         user_info['card_details'] = self.credit_card_info()
 
-        if os.path.isfile('users.json'):
-            with open('users.json') as file:
+        if os.path.isfile(file_path):
+            updates = []
+            with open(file_path) as file:
                 data = json.load(file)
                 data.append(user_info)
+
+                with open(file_path, 'w') as file:
+                    json.dump(data, file)
         else:
-            with open('users.json', 'w') as file:
-                json.dump(user_info, file, indent=4, separators=(',',':'))
-            print('User Saved')
-            
+            with open(file_path, 'w') as file:
+                json.dump([user_info], file, indent=4, separators=(',',':'))
+
+        print('Details Saved')            
 
 
 
