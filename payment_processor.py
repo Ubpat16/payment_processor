@@ -1,4 +1,8 @@
 class Credit:
+
+    def __init__(self, available_amount,) -> None:
+        self.balance = available_amount
+
     def one_time_payments(self):
         pass
 
