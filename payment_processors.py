@@ -1,10 +1,8 @@
-from genericpath import isfile
 import json
 import os
 import time
 from payments import UserPayments
 import datetime as dt
-from user import User
 
 file_path = 'appdata/cash_book.json'
 payment_book = 'appdata/completed_payment.json'

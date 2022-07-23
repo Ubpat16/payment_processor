@@ -1,7 +1,5 @@
-from genericpath import isfile
 import json
 import os
-from tkinter import Y
 from user import User
 from transaction import UserTransactions
 
