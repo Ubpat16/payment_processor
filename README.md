@@ -1,6 +1,6 @@
 # payment_processor
 
-Hi everyone. This is a basic payment processor with a user profile that simulates a popular online payment platform in real time. The software is so simple that it uses only built-in Python packages.
+Hi everyone. This is a basic payment processor with user profile features that simulates popular online payment platforms in real time. The software is so simple that it uses only python's built-in packages.
 To start the program, run Main.py and follow the prompts on your console. 
 
 Features
