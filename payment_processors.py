@@ -44,7 +44,7 @@ class Credit:
         card_info['expiration_date'] =  input('Expiration details: ')
         card_info['cvc_code'] = input('Card CVC code: ')
 
-        prompt = input('Do you want to save your card information? ').lower()
+        prompt = input('Do you want to save your card information? Y for Yes, N for No ').lower()
         if prompt == 'y':
             with open(data_book) as file:
                 data = json.load(file)
