@@ -73,7 +73,8 @@ class Credit:
         prompt = input('Type "y" to proceed ').lower()
         if prompt == 'y':
             total_order = user_payment.order_amount
-            monthly_payment = total_order/3
+            monthly_payment = int(total_order/3)
+            self.order_amount = monthly_payment
             for x in range(3):
                 subscription = UserPayments(user_id=self.user_id, order_no=self.order_no, order_amount=monthly_payment)
                 pay = subscription.make_payment()
