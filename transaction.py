@@ -2,6 +2,7 @@ import json
 import os
 import random
 from payment_processors import Credit, PayPal, Bank
+import time
 
 file_path = 'appdata/cash_book.json'
 payment_book = 'appdata/completed_payment.json'
@@ -67,12 +68,30 @@ class UserTransactions:
             self.status = 'Paid'
             print("Now proceeding to Payment")
             choose_payment_gateway = input('Please choose your method of payment? "C" for Credit Card Purchases, "P" for PayPal and "B" for Bank Transfers: ').lower()
+            prompt = int(input(f'\nHi, Your confirmation code is {self.confirmation_code}, type the code here to proceed: '))
             if choose_payment_gateway == 'c':
-                Credit(user_id=self.user_id, order_no=order_no, order_amount=order_amount)
+                if prompt == self.confirmation_code:
+                    print(f'{self.username} Authorized\n')
+                    time.sleep(1)
+                    Credit(user_id=self.user_id, order_no=order_no, order_amount=order_amount)
+                else:
+                    print('Wrong Code! Unauthorized User!\n')
+                    return
             elif choose_payment_gateway == 'p':
-                PayPal(user_id=self.user_id, username=self.username, order_no=order_no, order_amount=order_amount)
+                if prompt == self.confirmation_code:
+                    print(f'{self.username} Authorized\n')
+                    PayPal(user_id=self.user_id, username=self.username, order_no=order_no, order_amount=order_amount)
+                else:
+                    print('Wrong Code! Unauthorized User!\n')
+                    return
+
             elif choose_payment_gateway == 'b':
-                Bank(user_id=self.user_id, order_no=order_no, order_amount=order_amount)
+                if prompt == self.confirmation_code:
+                    print(f'{self.username} Authorized\n')
+                    Bank(user_id=self.user_id, order_no=order_no, order_amount=order_amount)
+                else:
+                    print('Wrong Code! Unauthorized User!\n')
+                    return
 
         elif prompt == 2:
             self.status == 'Pending'

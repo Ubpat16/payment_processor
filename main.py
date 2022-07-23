@@ -28,7 +28,7 @@ if prompt == 'y':
             user_transaction = UserTransactions(user_id=user_id, username=username)
             user_transaction.place_order()
         else:
-            print('Username not found, Please register again if you forgot the name you used or check "appdata/data_book.json"')
+            print('\nUsername not found, Please register again if you forgot the name you used or check "appdata/data_book.json"\n')
 
 
 elif prompt == 'n':
