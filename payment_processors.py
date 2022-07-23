@@ -44,7 +44,7 @@ class Credit:
         card_info['expiration_date'] =  input('Expiration details: ')
         card_info['cvc_code'] = input('Card CVC code: ')
 
-        prompt = input('Do you want to save your card information? Y for Yes, N for No ').lower()
+        prompt = input('\nDo you want to save your card information? Y for Yes, N for No ').lower()
         if prompt == 'y':
             with open(data_book) as file:
                 data = json.load(file)
@@ -54,7 +54,7 @@ class Credit:
 
                 with open(data_book, 'w') as file:
                     json.dump(data, file, indent=4, separators=(',',':'))
-                    print('Your card information has been saved')
+                    print('Your card information has been saved\n')
         self.proceed()
 
     
@@ -68,7 +68,7 @@ class Credit:
 
     def subscription_payments(self):
         user_payment = UserPayments(self.user_id, self.order_no, self.order_amount)
-        print('Subscription payments are timedbased, so you will be charged every 30Days (3s) for the next 90Days')
+        print('\nSubscription payments are time-based, so you will be charged every 30Days (3s) for the next 90Days')
         time.sleep(1)
         prompt = input('Type "y" to proceed ').lower()
         if prompt == 'y':
@@ -98,11 +98,11 @@ class Credit:
             except FileNotFoundError:
                 return False
 
-        print('Hi, Welcome to Our Customer service, We apologize for any inconvienience our product must have cost you.')
-        print('All Refund request takes 7 working days to fullfilled, This interval will give us an ample opportunity to investigate what went wrong so we could serve you better in the future')
+        print('\nHi, Welcome to Our Customer service, We apologize for any inconvienience our product must have cost you.')
+        print('All Refund request takes 7 working days to fullfilled, This interval will give us an ample opportunity to investigate what went wrong so we could serve you better in the future\n')
         time.sleep(7)
         if if_order_exist():
-            print('Hi, Thanks for your continous patronage, Your refunds has been processed, Please check your account information for your balance')
+            print('\nHi, Thanks for your continous patronage, Your refunds has been processed, Please check your account information for your balance')
             refund_payment = UserPayments(user_id=self.user_id, order_no=self.order_no, order_amount=self.order_amount)
             refund_amount = refund_payment.order_amount
 
@@ -124,7 +124,7 @@ class Credit:
                                 separators=(',', ':'))
                     print('Successful')
         else:
-            print('Hi, After going through our records, It seems you didnt complete your order!')
+            print('\nHi, After going through our records, It seems you didnt complete your order!')
             time.sleep(1)
 
     def print_invoice(self):
@@ -159,7 +159,7 @@ class PayPal:
             self.order_no = order_no
             self.order_amount = order_amount
 
-            prompt = input('Type "S" to Signup for a paypal account or Type "L" to login into an existing one: ').lower()
+            prompt = input('\nType "S" to Signup for a paypal account or Type "L" to login into an existing one: ').lower()
             if prompt == 's':
                 self.paypal_signup()
 
@@ -205,6 +205,7 @@ class PayPal:
 
     def paypal_login(self):
         if os.path.isfile(paypal_records) is False:
+            print('Hi, Please Signup as this is the first time you will be using our Paypal feature')
             self.paypal_signup()
         else:
             print('Hi, Welcome back! Spend wisely')
@@ -220,7 +221,7 @@ class PayPal:
                         return
 
                     else:
-                        print('Wrong username or password')    
+                        print('Wrong username or password\n')                         
                         return
 
     def one_time_payments(self):
