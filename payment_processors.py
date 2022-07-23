@@ -176,36 +176,38 @@ class PayPal:
             self.refunds()
 
     def paypal_signup(self):
-        print('Welcome to PayPal, Please Sign Up to Make your payment E A S Y')
+        print('\nWelcome to PayPal, Please Sign Up to Make your payment E A S Y')
         paypal_info = {}
 
         paypal_info['username'] =  input('Your PayPal username: ')
         paypal_info['password'] = input('Your PayPal Password: ')
 
-        prompt = input('Do you want to save your login information? ').lower()
-        if os.path.isfile(paypal_records):
-            with open(paypal_records) as file:
-                records = json.load(file)
-                records.append({
-                    'username': paypal_info['username'],
-                    'password': paypal_info['password']
-                    })
+        prompt = input('Do you want to save your login information? Y for Yes, N for No: ').lower()
+        if prompt == 'y':
+            if os.path.isfile(paypal_records):
+                with open(paypal_records) as file:
+                    records = json.load(file)
+                    records.append({
+                        'username': paypal_info['username'],
+                        'password': paypal_info['password']
+                        })
+                    with open(paypal_records, 'w') as file:
+                        json.dump(records, file, indent=4, separators=(',',':'))
+
+            else:
                 with open(paypal_records, 'w') as file:
-                    json.dump(records, file, indent=4, separators=(',',':'))
-
+                    json.dump([{
+                        'username': paypal_info['username'],
+                        'password': paypal_info['password']
+                    }], file, indent=4, separators=(',',':'))
+                    print('Card Saved!')
         else:
-            with open(paypal_records, 'w') as file:
-                json.dump([{
-                    'username': paypal_info['username'],
-                    'password': paypal_info['password']
-                }], file, indent=4, separators=(',',':'))
-
-        print('Login Successful!')
+            print('Login Successful!')
         self.proceed()
 
     def paypal_login(self):
         if os.path.isfile(paypal_records) is False:
-            print('Hi, Please Signup as this is the first time you will be using our Paypal feature')
+            print('\nHi, Please Signup as this is the first time you will be using our Paypal feature')
             self.paypal_signup()
         else:
             print('Hi, Welcome back! Spend wisely')

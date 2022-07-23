@@ -71,7 +71,7 @@ class UserTransactions:
             prompt = int(input(f'\nHi, Your confirmation code is {self.confirmation_code}, type the code here to proceed: '))
             if choose_payment_gateway == 'c':
                 if prompt == self.confirmation_code:
-                    print(f'{self.username} Authorized\n')
+                    print(f'{(self.username).title()} is Authorized\n')
                     time.sleep(1)
                     Credit(user_id=self.user_id, order_no=order_no, order_amount=order_amount)
                 else:
@@ -79,7 +79,7 @@ class UserTransactions:
                     return
             elif choose_payment_gateway == 'p':
                 if prompt == self.confirmation_code:
-                    print(f'{self.username} Authorized\n')
+                    print(f'{(self.username).title()} is Authorized\n')
                     PayPal(user_id=self.user_id, username=self.username, order_no=order_no, order_amount=order_amount)
                 else:
                     print('Wrong Code! Unauthorized User!\n')
@@ -87,7 +87,7 @@ class UserTransactions:
 
             elif choose_payment_gateway == 'b':
                 if prompt == self.confirmation_code:
-                    print(f'{self.username} Authorized\n')
+                    print(f'{(self.username).title()} is Authorized\n')
                     Bank(user_id=self.user_id, order_no=order_no, order_amount=order_amount)
                 else:
                     print('Wrong Code! Unauthorized User!\n')

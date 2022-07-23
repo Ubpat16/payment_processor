@@ -16,8 +16,12 @@ prompt = input('Do you have an Accout? "n" to create a new one. "y" to login an 
 
 if prompt == 'y':
     username = input('Your registered Username: ').lower()
-    with open(data_book) as file:
-        user_login = json.load(file)
+    try:
+        with open(data_book) as file:
+            user_login = json.load(file)
+    except FileNotFoundError:
+        print('This is your time, please Register an account instead!')
+    else:
         users = []
         for item in user_login:
             users.append(item['username'])
