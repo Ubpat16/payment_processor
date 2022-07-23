@@ -21,11 +21,12 @@ class Credit:
 
         with open(data_book) as file:
             user_data = json.load(file)
-            for x in range(len(user_data)):
-                if user_data[x]['user_id'] == self.user_id and 'card_information' in user_data[x].keys():
-                    self.proceed()
-                else:
-                    self.credit_card_info(user_id)
+            current_user = self.user_id
+            if 'card_information' in user_data[current_user - 1].keys():
+                self.proceed()
+            else:
+                self.credit_card_info()
+
     def proceed(self):
         prompt = input('Is this a one time Payment or Subscription: "t" for One Time Payment, "s" for subscription or a Refund Request "r"?: ').lower()
         if prompt == 't':
@@ -35,7 +36,7 @@ class Credit:
         elif prompt == 'r':
             self.refunds()
 
-    def credit_card_info(self, user_id):
+    def credit_card_info(self):
         card_info = {}
 
         card_info['card_no'] =  input('Please type your card no: ')
@@ -48,7 +49,7 @@ class Credit:
             with open(data_book) as file:
                 data = json.load(file)
                 for x in range(len(data)):
-                    if data[x]['user_id'] == user_id:
+                    if data[x]['user_id'] == self.user_id:
                         data[x]['card_information'] = card_info
 
                 with open(data_book, 'w') as file:
@@ -147,6 +148,7 @@ class Credit:
     Have a lovely Day
 ##########################################################################
         ''')
+        return
         
 class PayPal:
     def __init__(self, user_id, username, order_no, order_amount):
